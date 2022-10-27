@@ -1,13 +1,17 @@
 public abstract class AbstractGear implements Gear {
 
-    private Integer id;
     private String adj;
     private String noun;
     private Integer attackAmount;
     private Integer defenseAmount;
 
-    public AbstractGear(Integer id, String adj, String noun, Integer attackAmount, Integer defenseAmount) {
-        this.id = id;
+    public AbstractGear(String adj, String noun, Integer attackAmount, Integer defenseAmount) {
+        if (adj == null || noun == null || attackAmount == null || defenseAmount == null) {
+            throw new IllegalArgumentException("Input should not be null");
+        }
+        if (attackAmount < 0 || defenseAmount < 0) {
+            throw new IllegalArgumentException("Attack amount or defense amount should not be negative");
+        }
         this.adj = adj;
         this.noun = noun;
         this.attackAmount = attackAmount;
@@ -30,6 +34,16 @@ public abstract class AbstractGear implements Gear {
     }
 
     @Override
+    public Gear combine(Gear other) {
+        if (!(checkType(other))) {
+            throw new IllegalArgumentException("Wrong type of gear");
+        }
+        return newGear(other.getAdj() + ", " + this.getAdj(), this.getNoun(),
+                other.getGearAttackAmount() + this.getGearAttackAmount(),
+                other.getGearDefenseAmount() + this.getGearDefenseAmount());
+    }
+
+    @Override
     public Integer getGearAttackAmount() {
         return attackAmount;
     }
@@ -39,4 +53,7 @@ public abstract class AbstractGear implements Gear {
         return defenseAmount;
     }
 
+    abstract Gear newGear(String adj, String noun, Integer attackAmount, Integer defenseAmount);
+
+    abstract boolean checkType(Gear other);
 }
