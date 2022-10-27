@@ -9,6 +9,9 @@ public abstract class AbstractGear implements Gear {
         if (adj == null || noun == null || attackAmount == null || defenseAmount == null) {
             throw new IllegalArgumentException("Input should not be null");
         }
+        if (adj == "" || noun == "") {
+            throw new IllegalArgumentException("Names should not be empty string");
+        }
         if (attackAmount < 0 || defenseAmount < 0) {
             throw new IllegalArgumentException("Attack amount or defense amount should not be negative");
         }
@@ -44,16 +47,22 @@ public abstract class AbstractGear implements Gear {
     }
 
     @Override
-    public Integer getGearAttackAmount() {
+    public int getGearAttackAmount() {
         return attackAmount;
     }
 
     @Override
-    public Integer getGearDefenseAmount() {
+    public int getGearDefenseAmount() {
         return defenseAmount;
+    }
+
+    @Override
+    public String toString() {
+        return getName() + " -- defense strength: " + defenseAmount + ", attack strength " + attackAmount;
     }
 
     abstract Gear newGear(String adj, String noun, Integer attackAmount, Integer defenseAmount);
 
     abstract boolean checkType(Gear other);
+
 }

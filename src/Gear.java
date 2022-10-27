@@ -8,8 +8,8 @@ public interface Gear {
 
     Gear combine(Gear other);
 
-    Integer getGearAttackAmount();
+    int getGearAttackAmount();
 
-    Integer getGearDefenseAmount();
+    int getGearDefenseAmount();
 
 }
