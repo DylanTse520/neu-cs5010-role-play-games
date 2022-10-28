@@ -17,50 +17,20 @@ public class Battle {
         this.items = items;
     }
 
-    public void chooseGear(Character a, Character b) {
-        List<Gear> selectedHeadGears = new ArrayList<>();
-        List<Gear> selectedHandGears = new ArrayList<>();
-        List<Gear> selectedFootWears = new ArrayList<>();
+    public void chooseGear(Character character, int index) {
+        List<Gear> selectedGears = new ArrayList<>();
 
-        int i = 10;
+        Gear item = items.get(index-1);
 
-        while (items.size() > 0) {
-            i--;
-            Gear item = items.get(i);
-
-            if (item instanceof HeadGear) {
-                selectedHeadGears.add(item);
-                Gear gear = a.getHeadGear();
-                if (selectedHeadGears.size() == 2) {
-                    gear = gearPriority(selectedHeadGears);
-                }
-                if (i % 2 == 0) a.pickItem(gear);
-                else b.pickItem(gear);
-                items.remove(gear);
-            }
-
-            if (item instanceof HandGear) {
-                selectedHandGears.add(item);
-                Gear gear = a.getHandGears().get(0);
-                if (selectedHandGears.size() == 4) {
-                    gear = gearPriority(selectedHandGears);
-                }
-                if (i % 2 == 0) a.pickItem(gear);
-                else b.pickItem(gear);
-                items.remove(gear);
-            }
-
-            if (item instanceof Footwear) {
-                selectedFootWears.add(item);
-                Gear gear = a.getFootwears().get(0);
-                if (selectedHandGears.size() == 4) {
-                    gear = gearPriority(selectedFootWears);
-                }
-                if (i % 2 == 0) a.pickItem(gear);
-                else b.pickItem(gear);
-                items.remove(gear);
-            }
+        if (character.getHandGears() == null || character.getHandGears().size() < 2 || character.getFootwears().size() < 2) {
+            selectedGears.add(item);
+            Gear gear = gearPriority(selectedGears);
+            character.pickItem(gear);
+            items.remove(gear);
         }
+
+        character.pickItem(item);
+        items.remove(item);
     }
 
     Gear finalGear = null;
@@ -97,7 +67,19 @@ public class Battle {
     }
 
     public void startBattle() {
-        chooseGear(a, b);
+        int i = 10;
+        List<Character> list = new ArrayList<>();
+        list.add(a);
+        list.add(b);
+
+        while (items.size() > 0) {
+            Random randomizer = new Random();
+            Character random = list.get(randomizer.nextInt(list.size()));
+            chooseGear(random, i);
+            i--;
+
+        }
+
         System.out.println("Player" + a.getUid() + " " + a.getHeadGear() + a.getHandGears().get(0) + a.getHandGears().get(1) + a.getFootwears().get(0) + a.getFootwears().get(1) + " " + "Defense: " + a.getTotalDefense() + " " + "Attack: " + a.getTotalAttack());
         System.out.println("Player" + b.getUid() + " " + b.getHeadGear() + b.getHandGears().get(0) + b.getHandGears().get(1) + b.getFootwears().get(0) + b.getFootwears().get(1) + " " + "Defense: " + b.getTotalDefense() + " " + "Attack: " + b.getTotalAttack());
 
