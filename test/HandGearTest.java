@@ -3,6 +3,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * This class is to test a hand gear. It contains a hand gear.
+ * */
 public class HandGearTest {
 
     private HandGear handGear;

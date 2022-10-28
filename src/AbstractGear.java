@@ -1,3 +1,8 @@
+/**
+ * This is the abstract gear class. A gear is a piece of clothing a character can wear to either increase performance
+ * with the power to attack or to minimize damage with the power to defense. It has a name consisting of an adjective
+ * and a noun, the amount it helps to attack and defense.
+ * */
 public abstract class AbstractGear implements Gear {
 
     private String adj;
@@ -5,6 +10,17 @@ public abstract class AbstractGear implements Gear {
     private Integer attackAmount;
     private Integer defenseAmount;
 
+    /**
+     * Constructs a gear object and initialize it with the given adjective part of the name and the noun part of the
+     * name, the attack amount and the defense amount.
+     *
+     * @param adj            String, the adjective part of the name
+     * @param noun           String, the noun part of the name
+     * @param attackAmount   Integer, the amount of attack power of the gear
+     * @param defenseAmount  Integer, the amount of defense power of the gear
+     * @exception IllegalArgumentException thrown when input is null, names are empty or attack amount or defense
+     * amount is negative
+     */
     public AbstractGear(String adj, String noun, Integer attackAmount, Integer defenseAmount) {
         if (adj == null || noun == null || attackAmount == null || defenseAmount == null) {
             throw new IllegalArgumentException("Input should not be null");
@@ -61,8 +77,23 @@ public abstract class AbstractGear implements Gear {
         return getName() + " -- defense strength: " + defenseAmount + ", attack strength " + attackAmount;
     }
 
+
+    /**
+     * The new gear method to be implemented by a child class, returning the actual class of the gear.
+     *
+     * @param adj            String, the adjective part of the name
+     * @param noun           String, the noun part of the name
+     * @param attackAmount   Integer, the adjective part of the name
+     * @param defenseAmount  Integer, the noun part of the name
+     */
     abstract Gear newGear(String adj, String noun, Integer attackAmount, Integer defenseAmount);
 
+    /**
+     * The check type method to be implemented by a child class, comparing the class of the given gear and this gear.
+     *
+     * @param other  Gear, the gear to compare the class against
+     * @return true if the given gear is of the class as this gear and false otherwise
+     */
     abstract boolean checkType(Gear other);
 
 }

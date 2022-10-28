@@ -3,6 +3,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * This class is to test a footwear. It contains a footwear.
+ * */
 public class FootwearTest {
 
     private Footwear footwear;
