@@ -1,20 +1,19 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Character class has an attack and defense strength. It can pick up new gears and add attack/defense strength.
  */
 
 public class Character {
-    private int uid;
-    private final int baseAttack;
-    private final int baseDefense;
 
-    private static Gear gear;
+    private final static int MAXIMUM_NUM_OF_ITEMS = 2;
     private static HeadGear headGear;
-    private static HandGear handGear;
-    private static Footwear footWear;
     private static List<HandGear> handgearArr = new ArrayList<>();
     private static List<Footwear> footwearArr = new ArrayList<>();
+    private final int baseAttack;
+    private final int baseDefense;
+    private int uid;
 
     /**
      * Constructs a character with 3 params: uid, baseAttack and baseDefense.
@@ -25,8 +24,37 @@ public class Character {
         this.baseDefense = baseDefense;
     }
 
+    public static void pickItem(Gear gear) {
+        if (gear instanceof HeadGear) {
+            headGear = (HeadGear) gear;
+        }
+
+        if (gear instanceof HandGear) {
+            if (handgearArr.size() < MAXIMUM_NUM_OF_ITEMS) {
+                handgearArr.add((HandGear) gear);
+            } else {
+                gear.combine(gear);
+            }
+        }
+
+        if (gear instanceof Footwear) {
+            if (footwearArr.size() < MAXIMUM_NUM_OF_ITEMS) {
+                footwearArr.add((Footwear) gear);
+            } else {
+                gear.combine(gear);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        headGear = new HeadGear("Strong", "Helmet", 0, 5);
+        HandGear handGear = new HandGear("Fierce", "Sword", 8, 0);
+        pickItem(handGear);
+    }
+
     /**
      * Getter method for unique id.
+     *
      * @return the unique id of a character.
      */
     public int getUid() {
@@ -35,6 +63,7 @@ public class Character {
 
     /**
      * Getter method for base attack.
+     *
      * @return the base attack.
      */
     public int getBaseAttack() {
@@ -43,6 +72,7 @@ public class Character {
 
     /**
      * Getter method for base defense.
+     *
      * @return the base defense.
      */
     public int getBaseDefense() {
@@ -79,33 +109,5 @@ public class Character {
             totalDefense += fw.getGearDefenseAmount();
         }
         return totalDefense;
-    }
-
-    public static void pickItem(Gear gear) {
-        if (gear instanceof HeadGear) {
-            headGear = (HeadGear) gear;
-        }
-
-        if (gear instanceof HandGear) {
-            if (handgearArr.size() < 2) {
-                handgearArr.add((HandGear) gear);
-            } else {
-                gear.combine(gear);
-            }
-        }
-
-        if (gear instanceof Footwear) {
-            if (footwearArr.size() < 2) {
-                footwearArr.add((Footwear) gear);
-            } else {
-                gear.combine(gear);
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        headGear = new HeadGear("Strong", "Helmet", 0, 5);
-        HandGear handGear = new HandGear("Fierce", "Sword", 8, 0);
-        pickItem(handGear);
     }
 }

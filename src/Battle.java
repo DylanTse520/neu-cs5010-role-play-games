@@ -1,9 +1,15 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * This class is the driver class that represents a battle.
  */
 public class Battle {
+    Gear finalGear = null;
+    int maxValue = -1;
+    boolean hasFinalAttachGear = false;
+    boolean hasFinalDefenseGear = false;
     private Character a;
     private Character b;
     private List<Gear> items;
@@ -19,13 +25,14 @@ public class Battle {
 
     /**
      * A method to let character choose gear according to 4 different rules.
+     *
      * @param character a character of the battle.
-     * @param index current index of an item.
+     * @param index     current index of an item.
      */
     public void chooseGear(Character character, int index) {
         List<Gear> selectedGears = new ArrayList<>();
 
-        Gear item = items.get(index-1);
+        Gear item = items.get(index - 1);
 
         if (character.getHandGears() == null || character.getHandGears().size() < 2 || character.getFootwears().size() < 2) {
             selectedGears.add(item);
@@ -38,13 +45,9 @@ public class Battle {
         items.remove(item);
     }
 
-    Gear finalGear = null;
-    int maxValue = -1;
-    boolean hasFinalAttachGear = false;
-    boolean hasFinalDefenseGear = false;
-
     /**
      * A method for prioritizing the gear when there are multiple choices.
+     *
      * @param selectedGears a list of all the gear that can be chosen.
      * @return a fear with highest attacck/defence amount.
      */
@@ -96,8 +99,8 @@ public class Battle {
         System.out.println("Player" + a.getUid() + " " + a.getHeadGear() + a.getHandGears().get(0) + a.getHandGears().get(1) + a.getFootwears().get(0) + a.getFootwears().get(1) + " " + "Defense: " + a.getTotalDefense() + " " + "Attack: " + a.getTotalAttack());
         System.out.println("Player" + b.getUid() + " " + b.getHeadGear() + b.getHandGears().get(0) + b.getHandGears().get(1) + b.getFootwears().get(0) + b.getFootwears().get(1) + " " + "Defense: " + b.getTotalDefense() + " " + "Attack: " + b.getTotalAttack());
 
-        int finalScoreA =  a.getBaseDefense() - a.getTotalAttack();
-        int finalScoreB =  b.getBaseDefense() - b.getTotalAttack();
+        int finalScoreA = a.getBaseDefense() - a.getTotalAttack();
+        int finalScoreB = b.getBaseDefense() - b.getTotalAttack();
 
         if (finalScoreA < finalScoreB) System.out.println("Player " + a.getUid() + " wins");
         else if (finalScoreA > finalScoreB) System.out.println("Player " + b.getUid() + " wins");
