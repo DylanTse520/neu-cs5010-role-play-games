@@ -3,6 +3,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * This class is to test a headgear. It contains a headgear.
+ * */
 public class HeadGearTest {
 
     private HeadGear headGear;

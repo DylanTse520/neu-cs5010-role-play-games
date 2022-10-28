@@ -3,6 +3,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * This class is to test the combine method of gears. It contains a headgear and two pieces of footwear.
+ * */
 public class CombineTest {
 
     private Footwear scurryingSandals;
