@@ -9,7 +9,7 @@ public class Battle {
     private List<Gear> items;
 
     /**
-     * Constructs a battle with 3 params: 2 characters and a list of items
+     * Constructs a battle with 3 params: 2 characters and a list of items.
      */
     public Battle(Character a, Character b, List<Gear> items) {
         this.a = a;
@@ -17,6 +17,11 @@ public class Battle {
         this.items = items;
     }
 
+    /**
+     * A method to let character choose gear according to 4 different rules.
+     * @param character a character of the battle.
+     * @param index current index of an item.
+     */
     public void chooseGear(Character character, int index) {
         List<Gear> selectedGears = new ArrayList<>();
 
@@ -38,6 +43,11 @@ public class Battle {
     boolean hasFinalAttachGear = false;
     boolean hasFinalDefenseGear = false;
 
+    /**
+     * A method for prioritizing the gear when there are multiple choices.
+     * @param selectedGears a list of all the gear that can be chosen.
+     * @return a fear with highest attacck/defence amount.
+     */
     public Gear gearPriority(List<Gear> selectedGears) {
         for (int i = 0; i < selectedGears.size(); i++) {
             if (selectedGears.get(i).getGearAttackAmount() > maxValue) {
@@ -66,6 +76,9 @@ public class Battle {
         return finalGear;
     }
 
+    /**
+     * A method to start a battle and print out the result.
+     */
     public void startBattle() {
         int i = 10;
         List<Character> list = new ArrayList<>();
