@@ -8,12 +8,12 @@ import java.util.List;
 public class Character {
 
     private final static int MAXIMUM_NUM_OF_ITEMS = 2;
-    private static HeadGear headGear;
-    private static List<HandGear> handgearArr = new ArrayList<>();
-    private static List<Footwear> footwearArr = new ArrayList<>();
+    private final int uid;
     private final int baseAttack;
     private final int baseDefense;
-    private int uid;
+    private final List<HandGear> handgearArr = new ArrayList<>();
+    private final List<Footwear> footwearArr = new ArrayList<>();
+    private HeadGear headGear;
 
     /**
      * Constructs a character with 3 params: uid, baseAttack and baseDefense.
@@ -24,7 +24,7 @@ public class Character {
         this.baseDefense = baseDefense;
     }
 
-    public static void pickItem(Gear gear) {
+    public void pickItem(Gear gear) {
         if (gear instanceof HeadGear) {
             headGear = (HeadGear) gear;
         }
@@ -44,12 +44,6 @@ public class Character {
                 gear.combine(gear);
             }
         }
-    }
-
-    public static void main(String[] args) {
-        headGear = new HeadGear("Strong", "Helmet", 0, 5);
-        HandGear handGear = new HandGear("Fierce", "Sword", 8, 0);
-        pickItem(handGear);
     }
 
     /**
@@ -92,7 +86,7 @@ public class Character {
     }
 
     public int getTotalAttack() {
-        int totalAttack = 0;
+        int totalAttack = baseAttack;
         for (HandGear hg : handgearArr) {
             totalAttack += hg.getGearAttackAmount();
         }
@@ -103,8 +97,8 @@ public class Character {
     }
 
     public int getTotalDefense() {
-        int totalDefense = 0;
-        totalDefense += headGear.getGearDefenseAmount();
+        int totalDefense = baseDefense;
+        totalDefense += headGear != null ? headGear.getGearDefenseAmount() : 0;
         for (Footwear fw : footwearArr) {
             totalDefense += fw.getGearDefenseAmount();
         }

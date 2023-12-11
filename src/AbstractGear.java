@@ -5,10 +5,10 @@
  * */
 public abstract class AbstractGear implements Gear {
 
-    private String adj;
-    private String noun;
-    private Integer attackAmount;
-    private Integer defenseAmount;
+    private final String adj;
+    private final String noun;
+    private final Integer attackAmount;
+    private final Integer defenseAmount;
 
     /**
      * Constructs a gear object and initialize it with the given adjective part of the name and the noun part of the
@@ -25,7 +25,7 @@ public abstract class AbstractGear implements Gear {
         if (adj == null || noun == null || attackAmount == null || defenseAmount == null) {
             throw new IllegalArgumentException("Input should not be null");
         }
-        if (adj == "" || noun == "") {
+        if (adj.equals("") || noun.equals("")) {
             throw new IllegalArgumentException("Names should not be empty string");
         }
         if (attackAmount < 0 || defenseAmount < 0) {
@@ -74,7 +74,7 @@ public abstract class AbstractGear implements Gear {
 
     @Override
     public String toString() {
-        return getName() + " -- defense strength: " + defenseAmount + ", attack strength " + attackAmount;
+        return getName() + " -- defense value: " + defenseAmount + ", attack value: " + attackAmount;
     }
 
 

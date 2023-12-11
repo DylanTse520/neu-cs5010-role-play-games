@@ -10,18 +10,18 @@ public class BattleTest {
     @Before
     public void testConstructor() {
         List<Gear> items = new ArrayList<>();
-        HeadGear headGear1 = new HeadGear("Weak", "Helmet", 0, 2);
-        HeadGear headGear2 = new HeadGear("Strong", "Helmet", 0, 5);
+        HeadGear headGear1 = new HeadGear("Weak", "Helmet", 0, 30);
+        HeadGear headGear2 = new HeadGear("Strong", "Helmet", 0, 50);
 
-        HandGear handGear1 = new HandGear("Fierce", "Sword", 8, 0);
-        HandGear handGear2 = new HandGear("Rusty", "Sword", 1, 0);
-        HandGear handGear3 = new HandGear("Bloodflame", "Blade", 30, 0);
-        HandGear handGear4 = new HandGear("Moonveil", "Katana", 200, 0);
+        HandGear handGear1 = new HandGear("Fierce", "Sword", 30, 0);
+        HandGear handGear2 = new HandGear("Rusty", "Sword", 10, 0);
+        HandGear handGear3 = new HandGear("Bloodflame", "Blade", 50, 0);
+        HandGear handGear4 = new HandGear("Moonveil", "Katana", 100, 0);
 
-        Footwear footwear1 = new Footwear("Scurrying", "Sandals", 3, 2);
-        Footwear footwear2 = new Footwear("Commoner", "Shoes", 10, 10);
-        Footwear footwear3 = new Footwear("Aristocrat", "Shoes", 15, 20);
-        Footwear footwear4 = new Footwear("Bloodhound", "Step", 20, 30);
+        Footwear footwear1 = new Footwear("Scurrying", "Sandals", 10, 100);
+        Footwear footwear2 = new Footwear("Commoner", "Shoes", 30, 50);
+        Footwear footwear3 = new Footwear("Aristocrat", "Shoes", 50, 30);
+        Footwear footwear4 = new Footwear("Bloodhound", "Step", 100, 10);
 
         items.add(headGear1);
         items.add(handGear2);
